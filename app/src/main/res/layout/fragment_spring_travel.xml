@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+             xmlns:tools="http://schemas.android.com/tools"
+             android:layout_width="match_parent"
+             android:layout_height="match_parent"
+             tools:context=".ui.springTravel.SpringTravelFragment">
+
+
+    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="10dp"
+                    android:text="2022出行防疫政策指南："
+                    android:textSize="18sp"/>
+
+            <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:layout_marginTop="20dp"
+                    android:orientation="horizontal">
+
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:text="出发地："
+                        android:textColor="@android:color/black"
+                        android:textSize="18sp"/>
+
+                <Spinner
+                        android:id="@+id/sp_province"
+                        android:layout_width="wrap_content"
+                        android:layout_margin="2dp"
+                        android:layout_height="wrap_content"
+                        android:spinnerMode="dropdown"/>
+
+                <Spinner
+                        android:id="@+id/sp_city"
+                        android:layout_width="wrap_content"
+                        android:layout_margin="2dp"
+                        android:layout_height="wrap_content"
+                        android:spinnerMode="dropdown"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:layout_marginTop="20dp"
+                    android:orientation="horizontal">
+
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:text="目的地："
+                        android:textColor="@android:color/black"
+                        android:textSize="18sp"/>
+
+                <Spinner
+                        android:id="@+id/sp_to_province"
+                        android:layout_width="wrap_content"
+                        android:layout_margin="2dp"
+                        android:layout_height="wrap_content"
+                        android:spinnerMode="dropdown"/>
+
+                <Spinner
+                        android:id="@+id/sp_to_city"
+                        android:layout_width="wrap_content"
+                        android:layout_margin="2dp"
+                        android:layout_height="wrap_content"
+                        android:spinnerMode="dropdown"/>
+
+            </LinearLayout>
+
+            <Button
+                    android:id="@+id/btn_query"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:textColor="@android:color/white"
+                    android:textSize="18sp"
+                    android:text="查询"
+                    android:background="@color/bottom_nav_selected"/>
+
+            <TextView
+                    android:id="@+id/tv_from"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="20sp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:textColor="@android:color/darker_gray"/>
+
+            <TextView
+                    android:id="@+id/tv_from_desc"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="16sp"
+                    android:layout_margin="10dp"
+                    android:textColor="@android:color/black"/>
+
+            <View
+                    android:id="@+id/view_line"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:visibility="gone"
+                    android:background="@android:color/darker_gray"/>
+
+            <TextView
+                    android:id="@+id/tv_to"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="20sp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:textColor="@android:color/darker_gray"/>
+
+            <TextView
+                    android:id="@+id/tv_to_desc"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="16sp"
+                    android:layout_margin="10dp"
+                    android:textColor="@android:color/black"/>
+
+        </LinearLayout>
+    </ScrollView>
+
+</FrameLayout>

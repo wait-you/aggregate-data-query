@@ -16,6 +16,8 @@ object SpringTravelNetwork {
 
     suspend fun getCities() = springTravelService.getCities().await()
 
+    suspend fun getPolicy(from: String, to: String) = springTravelService.getPolicy(from, to).await()
+
     private suspend fun <T> Call<T>.await() : T {
         return suspendCoroutine { continuation ->
             enqueue(object : Callback<T> {

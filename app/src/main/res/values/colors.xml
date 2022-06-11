@@ -7,4 +7,25 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="bottom_nav_selected">#A7DAC5</color>
+
+    <color name="color_red">#FF3366</color>
+    <!--灰色，导航栏RadioButton文字默认颜色-->
+    <color name="tab_text_bg">#BABABA</color>
+    <!--淡蓝色，导航栏RadioButton选中后文字颜色-->
+    <color name="lightblue">#ADD8E6</color>
+    <color name="light_blue_600">#FF039BE5</color>
+    <color name="light_blue_900">#FF01579B</color>
+    <color name="light_blue_A200">#FF40C4FF</color>
+    <color name="light_blue_A400">#FF00B0FF</color>
+    <color name="black_overlay">#66000000</color>
+
+    <color name="color_FFFFFF">#FFFFFF</color>
+    <color name="color_CCCCCC">#CCCCCC</color>
+    <color name="color_BABABA">#BABABA</color>
+    <color name="color_FAFAFA">#FAFAFA</color>
+    <color name="color_666666">#666666</color>
+    <color name="color_66CDAA">#66CDAA</color>
+    <color name="color_3F51B5">#3F51B5</color>
+
 </resources>

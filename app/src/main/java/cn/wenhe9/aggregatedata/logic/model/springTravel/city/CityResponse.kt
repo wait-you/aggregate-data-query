@@ -1,4 +1,4 @@
-package cn.wenhe9.aggregatedata.logic.model.springTravel
+package cn.wenhe9.aggregatedata.logic.model.springTravel.city
 
 data class CityResponse(
     val error_code: Int,

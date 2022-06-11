@@ -3,7 +3,7 @@ package cn.wenhe9.aggregatedata.logic.dao
 import android.content.Context
 import androidx.core.content.edit
 import cn.wenhe9.aggregatedata.AggregateDataApplication
-import cn.wenhe9.aggregatedata.logic.model.springTravel.City
+import cn.wenhe9.aggregatedata.logic.model.springTravel.city.City
 import com.google.gson.Gson
 
 /**

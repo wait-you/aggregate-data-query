@@ -1,11 +1,10 @@
 package cn.wenhe9.aggregatedata.logic
 
-import android.util.Log
 import android.widget.Toast
 import androidx.lifecycle.liveData
 import cn.wenhe9.aggregatedata.AggregateDataApplication
 import cn.wenhe9.aggregatedata.logic.dao.SpringTravelDao
-import cn.wenhe9.aggregatedata.logic.model.springTravel.City
+import cn.wenhe9.aggregatedata.logic.model.springTravel.city.City
 import cn.wenhe9.aggregatedata.logic.network.SpringTravelNetwork
 import kotlinx.coroutines.Dispatchers
 import kotlin.coroutines.CoroutineContext
@@ -23,6 +22,17 @@ object Repository {
             Result.success(cities)
         }else{
             Result.failure(RuntimeException("response status is ${cityResponse.error_code}"))
+        }
+    }
+
+    fun getPolicy(from: String, to: String) = fire(Dispatchers.IO){
+        val policyResponse = SpringTravelNetwork.getPolicy(from, to)
+
+        if (policyResponse.error_code == 0){
+            val result = policyResponse.result
+            Result.success(result)
+        }else{
+            Result.failure(RuntimeException("response status is ${policyResponse.error_code}"))
         }
     }
 
