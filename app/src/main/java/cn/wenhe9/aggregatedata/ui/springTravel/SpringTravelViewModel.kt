@@ -1,4 +1,4 @@
-package cn.wenhe9.aggregatedata.ui.springTravel.city
+package cn.wenhe9.aggregatedata.ui.springTravel
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations

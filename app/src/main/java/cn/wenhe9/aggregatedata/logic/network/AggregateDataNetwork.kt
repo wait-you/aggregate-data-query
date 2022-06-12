@@ -11,8 +11,14 @@ import kotlin.coroutines.suspendCoroutine
  *@author DuJinliang
  *2022/6/10
  */
-object SpringTravelNetwork {
+object AggregateDataNetwork {
     private val springTravelService = ServiceCreator.create<SpringTravelService>()
+
+    private val constellationService = ServiceCreator.create<ConstellationService>()
+
+    suspend fun getConstellationInfo(keyword: String) = constellationService.getConstellationInfo(keyword).await()
+
+    suspend fun getConstellationList() = constellationService.getConstellationList().await()
 
     suspend fun getCities() = springTravelService.getCities().await()
 

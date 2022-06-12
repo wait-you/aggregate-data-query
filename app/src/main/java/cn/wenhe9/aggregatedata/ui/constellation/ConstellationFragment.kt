@@ -5,56 +5,118 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
+import android.widget.Spinner
+import android.widget.Toast
+import androidx.lifecycle.ViewModelProvider
+import cn.wenhe9.aggregatedata.AggregateDataApplication
 import cn.wenhe9.aggregatedata.R
+import cn.wenhe9.aggregatedata.databinding.FragmentConstellationBinding
+import cn.wenhe9.aggregatedata.logic.model.constellation.Result
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [ConstellationFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class ConstellationFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
+    val viewModel by lazy {
+        ViewModelProvider(this).get(ConstellationViewModel::class.java)
     }
+
+    private var _binding : FragmentConstellationBinding? = null
+
+    private val binding get() = _binding!!
+
+    private var constellation = ""
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_constellation, container, false)
+        _binding = FragmentConstellationBinding.inflate(inflater, container, false)
+        val view = binding.root
+        return view
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment ConstellationFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            ConstellationFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+
+        initViews()
+
+        queryConstellationList()
+    }
+
+    private fun initViews() {
+        binding.btnQuery.setOnClickListener {
+            queryConstellationInfo()
+        }
+    }
+
+    private fun queryConstellationInfo() {
+        viewModel.getConstellationInfo(constellation)
+
+        viewModel.constellationInfoLiveData.observe(viewLifecycleOwner){result ->
+            val constellationInfo = result.getOrNull()
+
+            if (constellationInfo != null){
+                showConstellationInfo(constellationInfo)
+            }else{
+                Toast.makeText(AggregateDataApplication.context, "查询星座信息失败", Toast.LENGTH_SHORT).show()
             }
+        }
+    }
+
+    private fun showConstellationInfo(constellationInfo: Result) {
+        binding.tvName.text = constellationInfo.name
+        binding.viewLine.visibility = View.VISIBLE
+        binding.tvRange.text = constellationInfo.range
+        binding.viewLine2.visibility = View.VISIBLE
+        binding.tvXyhm.text = constellationInfo.xyhm
+        binding.viewLine3.visibility = View.VISIBLE
+        binding.tvGxmd.text = constellationInfo.gxmd
+        binding.viewLine5.visibility = View.VISIBLE
+        binding.tvJjtz.text = constellationInfo.jbtz
+        binding.viewLine6.visibility = View.VISIBLE
+        binding.tvXsfg.text = constellationInfo.xsfg
+        binding.viewLine7.visibility = View.VISIBLE
+        binding.tvZtpj.text = constellationInfo.zj
+    }
+
+    private fun queryConstellationList() {
+        viewModel.constellationList.observe(viewLifecycleOwner){ result ->
+            val constellationList = result.getOrNull()
+
+            if (constellationList != null){
+                setSpinnerData(constellationList)
+            }else{
+                Toast.makeText(AggregateDataApplication.context, "查询星座列表失败", Toast.LENGTH_SHORT).show()
+                result.exceptionOrNull()?.printStackTrace()
+            }
+        }
+    }
+
+    private fun setSpinnerData(constellationList: List<String>) {
+        //设置星座列表 适配器
+        setConstelllationListData(binding.spCons, constellationList)
+    }
+
+    private fun setConstelllationListData(spinner: Spinner, constellationList: List<String>) {
+
+        val adapter: ArrayAdapter<String> = ArrayAdapter<String>(AggregateDataApplication.context, R.layout.item_spinner_dropdown, constellationList)
+        spinner.adapter = adapter
+        adapter.notifyDataSetChanged()
+
+        spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                constellation = constellationList[position]
+            }
+
+            override fun onNothingSelected(p0: AdapterView<*>?) {
+                TODO("Not yet implemented")
+            }
+
+        }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }

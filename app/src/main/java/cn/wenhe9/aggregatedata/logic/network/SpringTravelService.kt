@@ -13,9 +13,9 @@ import retrofit2.http.Query
  *2022/6/10
  */
 interface SpringTravelService {
-    @GET("citys?key=${AggregateDataApplication.SPRING_TRAVEL_KEY}")
+    @GET("spring_travel/citys?key=${AggregateDataApplication.SPRING_TRAVEL_KEY}")
     fun getCities() : Call<CityResponse>
 
-    @GET("query?key=${AggregateDataApplication.SPRING_TRAVEL_KEY}")
+    @GET("spring_travel/policy?key=${AggregateDataApplication.SPRING_TRAVEL_KEY}")
     fun getPolicy(@Query("from") from: String, @Query("to")to: String) : Call<PolicyResponse>
 }

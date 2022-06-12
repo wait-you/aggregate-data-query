@@ -1,11 +1,9 @@
 package cn.wenhe9.aggregatedata.logic
 
-import android.widget.Toast
 import androidx.lifecycle.liveData
-import cn.wenhe9.aggregatedata.AggregateDataApplication
 import cn.wenhe9.aggregatedata.logic.dao.SpringTravelDao
 import cn.wenhe9.aggregatedata.logic.model.springTravel.city.City
-import cn.wenhe9.aggregatedata.logic.network.SpringTravelNetwork
+import cn.wenhe9.aggregatedata.logic.network.AggregateDataNetwork
 import kotlinx.coroutines.Dispatchers
 import kotlin.coroutines.CoroutineContext
 
@@ -14,8 +12,28 @@ import kotlin.coroutines.CoroutineContext
  *2022/6/11
  */
 object Repository {
+    fun getConstellationList() = fire(Dispatchers.IO){
+        val constellationList = AggregateDataNetwork.getConstellationList()
+        if (constellationList != null){
+            Result.success(constellationList)
+        }else{
+            Result.failure(RuntimeException("response is null"))
+        }
+    }
+
+    fun getConstellationInfo(keyword: String) = fire(Dispatchers.IO){
+        val constellationResponse = AggregateDataNetwork.getConstellationInfo(keyword)
+
+        if (constellationResponse.error_code == 0){
+            val constellation = constellationResponse.result
+            Result.success(constellation)
+        }else{
+            Result.failure(RuntimeException("response status is ${constellationResponse.error_code}"))
+        }
+    }
+
     fun getCities() = fire(Dispatchers.IO){
-        val cityResponse = SpringTravelNetwork.getCities()
+        val cityResponse = AggregateDataNetwork.getCities()
 
         if (cityResponse.error_code == 0){
             val cities = cityResponse.result
@@ -26,7 +44,7 @@ object Repository {
     }
 
     fun getPolicy(from: String, to: String) = fire(Dispatchers.IO){
-        val policyResponse = SpringTravelNetwork.getPolicy(from, to)
+        val policyResponse = AggregateDataNetwork.getPolicy(from, to)
 
         if (policyResponse.error_code == 0){
             val result = policyResponse.result
