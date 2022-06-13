@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import cn.wenhe9.aggregatedata.AggregateDataApplication
 import cn.wenhe9.aggregatedata.R
 import cn.wenhe9.aggregatedata.databinding.FragmentWeatherBinding
+import cn.wenhe9.aggregatedata.logic.Repository
 import cn.wenhe9.aggregatedata.logic.model.springTravel.city.City
 import cn.wenhe9.aggregatedata.logic.model.springTravel.city.Result
 import kotlin.streams.toList
@@ -23,10 +24,19 @@ class WeatherFragment : Fragment() {
         ViewModelProvider(this).get(WeatherViewModel::class.java)
     }
 
+    /**
+     * 城市名称
+     */
     var city = ""
 
+    /**
+     * 天气 适配器
+     */
     private lateinit var adapter: WeatherAdapter
 
+    /**
+     * 视图绑定
+     */
     private var _binding : FragmentWeatherBinding? = null
 
     private val binding get() = _binding!!
@@ -48,7 +58,11 @@ class WeatherFragment : Fragment() {
         queryCities()
     }
 
+    /**
+     * 初始化页面
+     */
     private fun initViews() {
+        //初始化 recyclerView
         val layoutManager = LinearLayoutManager(activity)
         val recyclerView = binding.recyclerView
         recyclerView.layoutManager = layoutManager
@@ -60,6 +74,9 @@ class WeatherFragment : Fragment() {
         }
     }
 
+    /**
+     * 查询天气信息
+     */
     private fun queryWeatherInfo() {
         viewModel.getWeatherInfo(city)
 
@@ -74,6 +91,9 @@ class WeatherFragment : Fragment() {
         }
     }
 
+    /**
+     * 展示天气信息
+     */
     private fun showWeather(weatherInfo: cn.wenhe9.aggregatedata.logic.model.weather.Result) {
         binding.weatherContent.visibility = View.VISIBLE
         binding.tvTempeature.text = weatherInfo.realtime.temperature
@@ -85,19 +105,35 @@ class WeatherFragment : Fragment() {
         adapter.notifyDataSetChanged()
     }
 
+    /**
+     * 查询城市信息
+     */
     private fun queryCities() {
-        viewModel.cityList.observe(viewLifecycleOwner){ result ->
-            val cityList = result.getOrNull()
+//判断是否本地有数据
+        if (Repository.isCitiesSaved()){
+            val cityList = Repository.getCitiesFromLocal()
+            setSpinnerData(cityList)
+        }else{
+            viewModel.setIsSaved()
 
-            if (cityList != null){
-                setSpinnerData(cityList)
-            }else{
-                Toast.makeText(AggregateDataApplication.context, "查询城市信息失败", Toast.LENGTH_SHORT).show()
-                result.exceptionOrNull()?.printStackTrace()
+            // 监听 cityList 数据变化 执行方法
+            viewModel.cityListLiveData.observe(viewLifecycleOwner){ result ->
+                val cityList = result.getOrNull()
+
+                if (cityList != null){
+                    setSpinnerData(cityList)
+                    Repository.saveCities(cityList)
+                }else{
+                    Toast.makeText(AggregateDataApplication.context, "查询城市信息失败", Toast.LENGTH_SHORT).show()
+                    result.exceptionOrNull()?.printStackTrace()
+                }
             }
         }
     }
 
+    /**
+     * 设置 spinner
+     */
     private fun setSpinnerData(cityList: List<Result>) {
         //设置出发城市的省份 适配器
         setProvincesData(binding.spProvince, cityList)
@@ -105,6 +141,9 @@ class WeatherFragment : Fragment() {
         setCityData(binding.spCity, cityList[0].citys)
     }
 
+    /**
+     * 设置省份数据 和 点击事件
+     */
     private fun setProvincesData(spinner: Spinner, cityList: List<Result>) {
         val provinceArray = cityList.stream().map { city -> city.province }.toList()
 
@@ -112,18 +151,21 @@ class WeatherFragment : Fragment() {
         spinner.adapter = adapter
         adapter.notifyDataSetChanged()
 
+        // 设置点击事件, 当点击了省份时, 更新城市
         spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
                 setCityData(binding.spCity, cityList[position].citys)
             }
 
             override fun onNothingSelected(p0: AdapterView<*>?) {
-                TODO("Not yet implemented")
             }
 
         }
     }
 
+    /**
+     * 设置城市信息
+     */
     private fun setCityData(spinner: Spinner, cityList: List<City>) {
         val cityArray = cityList.stream().map { city -> city.city }.toList()
 
@@ -136,13 +178,15 @@ class WeatherFragment : Fragment() {
             }
 
             override fun onNothingSelected(p0: AdapterView<*>?) {
-                TODO("Not yet implemented")
             }
 
         }
 
     }
 
+    /**
+     * 当销毁时移除binding
+     */
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null

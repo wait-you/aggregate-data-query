@@ -13,6 +13,7 @@ import androidx.lifecycle.ViewModelProvider
 import cn.wenhe9.aggregatedata.AggregateDataApplication
 import cn.wenhe9.aggregatedata.R
 import cn.wenhe9.aggregatedata.databinding.FragmentSpringTravelBinding
+import cn.wenhe9.aggregatedata.logic.Repository
 import cn.wenhe9.aggregatedata.logic.model.springTravel.city.City
 import cn.wenhe9.aggregatedata.logic.model.springTravel.city.Result
 import kotlin.streams.toList
@@ -22,8 +23,14 @@ class SpringTravelFragment : Fragment() {
         ViewModelProvider(this).get(SpringTravelViewModel::class.java)
     }
 
+    /**
+     * 出发和目的地
+     */
     val param = HashMap<String, String>()
 
+    /**
+     * 视图绑定
+     */
     private var _binding : FragmentSpringTravelBinding? = null
 
     private val binding get() = _binding!!
@@ -45,15 +52,22 @@ class SpringTravelFragment : Fragment() {
         queryCities()
     }
 
+    /**
+     * 页面初始化
+     */
     private fun initViews() {
         binding.btnQuery.setOnClickListener {
             queryPolicy()
         }
     }
 
+    /**
+     * 查询政策信息
+     */
     private fun queryPolicy() {
         viewModel.setFromAndTo(param)
 
+         // 监听 policyLiveData 数据变化执行法
         viewModel.policyLiveData.observe(viewLifecycleOwner){result ->
             val policy = result.getOrNull()
 
@@ -65,6 +79,9 @@ class SpringTravelFragment : Fragment() {
         }
     }
 
+    /**
+     * 展示政策
+     */
     private fun showPolicy(policy: cn.wenhe9.aggregatedata.logic.model.springTravel.policy.Result) {
         binding.springContent.visibility = View.VISIBLE
 
@@ -77,19 +94,35 @@ class SpringTravelFragment : Fragment() {
         binding.tvToDesc.text = policy.to_info.out_desc
     }
 
+    /**
+     * 查询城市信息
+     */
     private fun queryCities() {
-        viewModel.cityList.observe(viewLifecycleOwner){ result ->
-            val cityList = result.getOrNull()
+        //判断是否本地有数据
+        if (Repository.isCitiesSaved()){
+            val cityList = Repository.getCitiesFromLocal()
+            setSpinnerData(cityList)
+        }else{
+            viewModel.setIsSaved()
 
-            if (cityList != null){
-                setSpinnerData(cityList)
-            }else{
-                Toast.makeText(AggregateDataApplication.context, "查询城市信息失败", Toast.LENGTH_SHORT).show()
-                result.exceptionOrNull()?.printStackTrace()
+            // 监听 cityList 数据变化 执行方法
+            viewModel.cityListLiveData.observe(viewLifecycleOwner){ result ->
+                val cityList = result.getOrNull()
+
+                if (cityList != null){
+                    setSpinnerData(cityList)
+                    Repository.saveCities(cityList)
+                }else{
+                    Toast.makeText(AggregateDataApplication.context, "查询城市信息失败", Toast.LENGTH_SHORT).show()
+                    result.exceptionOrNull()?.printStackTrace()
+                }
             }
         }
     }
 
+    /**
+     * 设置适配器
+     */
     private fun setSpinnerData(cityList: List<Result>) {
         //设置出发城市的省份 适配器
         setProvincesData(binding.spProvince, cityList)
@@ -101,6 +134,9 @@ class SpringTravelFragment : Fragment() {
         setCityData(binding.spToCity, cityList[0].citys)
     }
 
+    /**
+     * 设置省份信息 和 点击事件
+     */
     private fun setProvincesData(spinner: Spinner, cityList: List<Result>) {
         val provinceArray = cityList.stream().map { city -> city.province }.toList()
 
@@ -108,6 +144,7 @@ class SpringTravelFragment : Fragment() {
         spinner.adapter = adapter
         adapter.notifyDataSetChanged()
 
+        //当点击省份时,更新城市列表
         spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
                 when (parent?.id) {
@@ -118,12 +155,14 @@ class SpringTravelFragment : Fragment() {
             }
 
             override fun onNothingSelected(p0: AdapterView<*>?) {
-                TODO("Not yet implemented")
             }
 
         }
     }
 
+    /**
+     * 更新城市信息
+     */
     private fun setCityData(spinner: Spinner, cityList: List<City>) {
         val cityArray = cityList.stream().map { city -> city.city }.toList()
 
@@ -146,13 +185,15 @@ class SpringTravelFragment : Fragment() {
             }
 
             override fun onNothingSelected(p0: AdapterView<*>?) {
-                TODO("Not yet implemented")
             }
 
         }
 
     }
 
+    /**
+     * 当销毁时移除binding
+     */
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null

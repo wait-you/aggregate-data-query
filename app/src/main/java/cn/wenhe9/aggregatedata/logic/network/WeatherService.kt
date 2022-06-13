@@ -10,8 +10,12 @@ import retrofit2.http.Query
 /**
  *@author DuJinliang
  *2022/6/13
+ * 天气 api
  */
 interface WeatherService {
+    /**
+     * 查询天气信息
+     */
     @GET("weather/query?key=${AggregateDataApplication.WEATHER_KEY}")
     fun getWeatherInfo(@Query("city") city: String) : Call<WeatherResponse>
 }

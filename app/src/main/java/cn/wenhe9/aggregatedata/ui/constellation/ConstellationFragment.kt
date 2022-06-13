@@ -13,6 +13,7 @@ import androidx.lifecycle.ViewModelProvider
 import cn.wenhe9.aggregatedata.AggregateDataApplication
 import cn.wenhe9.aggregatedata.R
 import cn.wenhe9.aggregatedata.databinding.FragmentConstellationBinding
+import cn.wenhe9.aggregatedata.logic.Repository
 import cn.wenhe9.aggregatedata.logic.model.constellation.Result
 
 class ConstellationFragment : Fragment() {
@@ -20,6 +21,9 @@ class ConstellationFragment : Fragment() {
         ViewModelProvider(this).get(ConstellationViewModel::class.java)
     }
 
+    /**
+     * 视图绑定
+     */
     private var _binding : FragmentConstellationBinding? = null
 
     private val binding get() = _binding!!
@@ -43,12 +47,18 @@ class ConstellationFragment : Fragment() {
         queryConstellationList()
     }
 
+    /**
+     * 初始化页面
+     */
     private fun initViews() {
         binding.btnQuery.setOnClickListener {
             queryConstellationInfo()
         }
     }
 
+    /**
+     * 查询星座信息
+     */
     private fun queryConstellationInfo() {
         viewModel.getConstellationInfo(constellation)
 
@@ -63,6 +73,9 @@ class ConstellationFragment : Fragment() {
         }
     }
 
+    /**
+     * 根据查到的星座信息展示
+     */
     private fun showConstellationInfo(constellationInfo: Result) {
         binding.consContent.visibility = View.VISIBLE
         binding.tvName.text = constellationInfo.name
@@ -80,24 +93,42 @@ class ConstellationFragment : Fragment() {
         binding.tvZtpj.text = constellationInfo.zj
     }
 
+    /**
+     * 查询星座列表
+     */
     private fun queryConstellationList() {
-        viewModel.constellationList.observe(viewLifecycleOwner){ result ->
-            val constellationList = result.getOrNull()
+        //判断是否本地有数据
+        if (Repository.isConstellationSaved()){
+            val constellationList = Repository.getConstellationFromLocal()
+            setSpinnerData(constellationList)
+        }else {
+            viewModel.setIsSaved()
 
-            if (constellationList != null){
-                setSpinnerData(constellationList)
-            }else{
-                Toast.makeText(AggregateDataApplication.context, "查询星座列表失败", Toast.LENGTH_SHORT).show()
-                result.exceptionOrNull()?.printStackTrace()
+            viewModel.constellationListLiveData.observe(viewLifecycleOwner){ result ->
+                val constellationList = result.getOrNull()
+
+                if (constellationList != null){
+                    setSpinnerData(constellationList)
+                    Repository.saveConstellations(constellationList)
+                }else{
+                    Toast.makeText(AggregateDataApplication.context, "查询星座列表失败", Toast.LENGTH_SHORT).show()
+                    result.exceptionOrNull()?.printStackTrace()
+                }
             }
         }
     }
 
+
+    /**
+     * 设置星座列表 适配器
+     */
     private fun setSpinnerData(constellationList: List<String>) {
-        //设置星座列表 适配器
         setConstelllationListData(binding.spCons, constellationList)
     }
 
+    /**
+     * 给星座 spinner 设置 适配器 和 点击事件
+     */
     private fun setConstelllationListData(spinner: Spinner, constellationList: List<String>) {
 
         val adapter: ArrayAdapter<String> = ArrayAdapter<String>(AggregateDataApplication.context, R.layout.item_spinner_dropdown, constellationList)
@@ -110,12 +141,14 @@ class ConstellationFragment : Fragment() {
             }
 
             override fun onNothingSelected(p0: AdapterView<*>?) {
-                TODO("Not yet implemented")
             }
 
         }
     }
 
+    /**
+     * 当销毁时移除 binding
+     */
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null

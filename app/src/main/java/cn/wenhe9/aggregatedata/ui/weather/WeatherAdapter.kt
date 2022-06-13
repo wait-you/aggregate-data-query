@@ -12,6 +12,7 @@ import org.w3c.dom.Text
 /**
  *@author DuJinliang
  *2022/6/13
+ * 天气adapter 用于展示recyclerView的每个条目
  */
 class WeatherAdapter(private val futureList: List<Future>): RecyclerView.Adapter<WeatherAdapter.ViewHolder>() {
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view){

@@ -6,6 +6,8 @@ import android.content.Context
 /**
  *@author DuJinliang
  *2022/6/10
+ * 设置静态常量
+ * 用于全局获取 context
  */
 class AggregateDataApplication : Application() {
     companion object {
