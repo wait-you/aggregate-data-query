@@ -13,6 +13,10 @@ class AggregateDataApplication : Application() {
         lateinit var context : Context
 
         const val SPRING_TRAVEL_KEY = "32714e93b309fda5bbc7f67b6fc93ea1"
+
+        const val CONSTELLATION_KEY = "fba04a36c8f7d8af3f66d45bb32fab6c"
+
+        const val WEATHER_KEY = "df2053ff6384681de9f8cdd983f68965"
     }
 
     override fun onCreate() {

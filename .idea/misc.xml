@@ -6,9 +6,9 @@
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_constellation.xml" value="0.35733695652173914" />
         <entry key="app/src/main/res/layout/fragment_spring_travel.xml" value="0.35733695652173914" />
-        <entry key="app/src/main/res/layout/fragment_weather.xml" value="0.35733695652173914" />
+        <entry key="app/src/main/res/layout/fragment_weather.xml" value="0.10079575596816977" />
         <entry key="app/src/main/res/layout/item_spinner_dropdown.xml" value="0.35733695652173914" />
-        <entry key="app/src/main/res/layout/weather_item.xml" value="0.35733695652173914" />
+        <entry key="app/src/main/res/layout/weather_item.xml" value="0.25" />
       </map>
     </option>
   </component>

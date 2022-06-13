@@ -64,6 +64,7 @@ class ConstellationFragment : Fragment() {
     }
 
     private fun showConstellationInfo(constellationInfo: Result) {
+        binding.consContent.visibility = View.VISIBLE
         binding.tvName.text = constellationInfo.name
         binding.viewLine.visibility = View.VISIBLE
         binding.tvRange.text = constellationInfo.range

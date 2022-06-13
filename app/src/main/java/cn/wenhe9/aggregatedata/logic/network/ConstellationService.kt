@@ -15,6 +15,6 @@ interface ConstellationService {
     @GET("constellation/list")
     fun getConstellationList() : Call<List<String>>
 
-    @GET("constellation/query?key=${AggregateDataApplication.SPRING_TRAVEL_KEY}")
+    @GET("constellation/query?key=${AggregateDataApplication.CONSTELLATION_KEY}")
     fun getConstellationInfo(@Query("keyword") keyword: String) : Call<ConstellationResponse>
 }

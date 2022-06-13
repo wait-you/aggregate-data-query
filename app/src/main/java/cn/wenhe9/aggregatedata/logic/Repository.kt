@@ -12,6 +12,16 @@ import kotlin.coroutines.CoroutineContext
  *2022/6/11
  */
 object Repository {
+    fun getWeatherInfo(city: String) = fire(Dispatchers.IO){
+        val weatherResponse = AggregateDataNetwork.getWeatherInfo(city)
+        if (weatherResponse.error_code == 0){
+            val weatherInfo = weatherResponse.result
+            Result.success(weatherInfo)
+        }else{
+            Result.failure(RuntimeException("response status is ${weatherResponse.error_code}"))
+        }
+    }
+
     fun getConstellationList() = fire(Dispatchers.IO){
         val constellationList = AggregateDataNetwork.getConstellationList()
         if (constellationList != null){

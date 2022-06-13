@@ -94,46 +94,54 @@
                     android:text="查询"
                     android:background="@color/bottom_nav_selected"/>
 
-            <TextView
-                    android:id="@+id/tv_from"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="20sp"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginLeft="10dp"
-                    android:textColor="@android:color/darker_gray"/>
-
-            <TextView
-                    android:id="@+id/tv_from_desc"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textSize="16sp"
-                    android:layout_margin="10dp"
-                    android:textColor="@android:color/black"/>
-
-            <View
-                    android:id="@+id/view_line"
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
+            <LinearLayout
+                    android:id="@+id/spring_content"
+                    android:orientation="vertical"
                     android:visibility="gone"
-                    android:background="@android:color/darker_gray"/>
-
-            <TextView
-                    android:id="@+id/tv_to"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="20sp"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginLeft="10dp"
-                    android:textColor="@android:color/darker_gray"/>
-
-            <TextView
-                    android:id="@+id/tv_to_desc"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textSize="16sp"
-                    android:layout_margin="10dp"
-                    android:textColor="@android:color/black"/>
+                    android:layout_height="wrap_content">
+
+                <TextView
+                        android:id="@+id/tv_from"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="20sp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginLeft="10dp"
+                        android:textColor="@android:color/darker_gray"/>
+
+                <TextView
+                        android:id="@+id/tv_from_desc"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="16sp"
+                        android:layout_margin="10dp"
+                        android:textColor="@android:color/black"/>
+
+                <View
+                        android:id="@+id/view_line"
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:visibility="gone"
+                        android:background="@android:color/darker_gray"/>
+
+                <TextView
+                        android:id="@+id/tv_to"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="20sp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginLeft="10dp"
+                        android:textColor="@android:color/darker_gray"/>
+
+                <TextView
+                        android:id="@+id/tv_to_desc"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="16sp"
+                        android:layout_margin="10dp"
+                        android:textColor="@android:color/black"/>
+            </LinearLayout>
 
         </LinearLayout>
     </ScrollView>

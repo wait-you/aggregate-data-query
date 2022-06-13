@@ -66,6 +66,8 @@ class SpringTravelFragment : Fragment() {
     }
 
     private fun showPolicy(policy: cn.wenhe9.aggregatedata.logic.model.springTravel.policy.Result) {
+        binding.springContent.visibility = View.VISIBLE
+
         binding.tvFrom.text = policy.from_info.city_name
         binding.tvFromDesc.text = policy.from_info.out_desc
 

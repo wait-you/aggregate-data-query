@@ -56,167 +56,174 @@
                     android:text="查询"
                     android:background="@color/bottom_nav_selected"/>
 
-            <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="20sp"
-                    android:text="星座名称"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginLeft="10dp"
-                    android:textColor="@android:color/darker_gray"/>
-
-            <TextView
-                    android:id="@+id/tv_name"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textSize="16sp"
-                    android:layout_margin="10dp"
-                    android:textColor="@android:color/black"/>
-
-            <View
-                    android:id="@+id/view_line"
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
+            <LinearLayout
+                    android:id="@+id/cons_content"
+                    android:orientation="vertical"
                     android:visibility="gone"
-                    android:background="@android:color/darker_gray"/>
-
-            <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="20sp"
-                    android:text="星座公历日期范围"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginLeft="10dp"
-                    android:textColor="@android:color/darker_gray"/>
-
-            <TextView
-                    android:id="@+id/tv_range"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textSize="16sp"
-                    android:layout_margin="10dp"
-                    android:textColor="@android:color/black"/>
+                    android:layout_height="wrap_content">
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="20sp"
+                        android:text="星座名称"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginLeft="10dp"
+                        android:textColor="@android:color/darker_gray"/>
 
-            <View
-                    android:id="@+id/view_line_2"
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:visibility="gone"
-                    android:background="@android:color/darker_gray"/>
+                <TextView
+                        android:id="@+id/tv_name"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="16sp"
+                        android:layout_margin="10dp"
+                        android:textColor="@android:color/black"/>
 
-            <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="20sp"
-                    android:text="幸运号码"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginLeft="10dp"
-                    android:textColor="@android:color/darker_gray"/>
+                <View
+                        android:id="@+id/view_line"
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:visibility="gone"
+                        android:background="@android:color/darker_gray"/>
 
-            <TextView
-                    android:id="@+id/tv_xyhm"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textSize="16sp"
-                    android:layout_margin="10dp"
-                    android:textColor="@android:color/black"/>
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="20sp"
+                        android:text="星座公历日期范围"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginLeft="10dp"
+                        android:textColor="@android:color/darker_gray"/>
 
-            <View
-                    android:id="@+id/view_line_3"
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:visibility="gone"
-                    android:background="@android:color/darker_gray"/>
+                <TextView
+                        android:id="@+id/tv_range"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="16sp"
+                        android:layout_margin="10dp"
+                        android:textColor="@android:color/black"/>
 
-            <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="20sp"
-                    android:text="个性缺点"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginLeft="10dp"
-                    android:textColor="@android:color/darker_gray"/>
+                <View
+                        android:id="@+id/view_line_2"
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:visibility="gone"
+                        android:background="@android:color/darker_gray"/>
 
-            <TextView
-                    android:id="@+id/tv_gxmd"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textSize="16sp"
-                    android:layout_margin="10dp"
-                    android:textColor="@android:color/black"/>
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="20sp"
+                        android:text="幸运号码"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginLeft="10dp"
+                        android:textColor="@android:color/darker_gray"/>
+
+                <TextView
+                        android:id="@+id/tv_xyhm"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="16sp"
+                        android:layout_margin="10dp"
+                        android:textColor="@android:color/black"/>
+
+                <View
+                        android:id="@+id/view_line_3"
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:visibility="gone"
+                        android:background="@android:color/darker_gray"/>
+
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="20sp"
+                        android:text="个性缺点"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginLeft="10dp"
+                        android:textColor="@android:color/darker_gray"/>
+
+                <TextView
+                        android:id="@+id/tv_gxmd"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="16sp"
+                        android:layout_margin="10dp"
+                        android:textColor="@android:color/black"/>
 
 
-            <View
-                    android:id="@+id/view_line_5"
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:visibility="gone"
-                    android:background="@android:color/darker_gray"/>
+                <View
+                        android:id="@+id/view_line_5"
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:visibility="gone"
+                        android:background="@android:color/darker_gray"/>
 
-            <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="20sp"
-                    android:text="基本特质"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginLeft="10dp"
-                    android:textColor="@android:color/darker_gray"/>
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="20sp"
+                        android:text="基本特质"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginLeft="10dp"
+                        android:textColor="@android:color/darker_gray"/>
 
-            <TextView
-                    android:id="@+id/tv_jjtz"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textSize="16sp"
-                    android:layout_margin="10dp"
-                    android:textColor="@android:color/black"/>
+                <TextView
+                        android:id="@+id/tv_jjtz"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="16sp"
+                        android:layout_margin="10dp"
+                        android:textColor="@android:color/black"/>
 
-            <View
-                    android:id="@+id/view_line_6"
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:visibility="gone"
-                    android:background="@android:color/darker_gray"/>
+                <View
+                        android:id="@+id/view_line_6"
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:visibility="gone"
+                        android:background="@android:color/darker_gray"/>
 
-            <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="20sp"
-                    android:text="行事风格"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginLeft="10dp"
-                    android:textColor="@android:color/darker_gray"/>
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="20sp"
+                        android:text="行事风格"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginLeft="10dp"
+                        android:textColor="@android:color/darker_gray"/>
 
-            <TextView
-                    android:id="@+id/tv_xsfg"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textSize="16sp"
-                    android:layout_margin="10dp"
-                    android:textColor="@android:color/black"/>
+                <TextView
+                        android:id="@+id/tv_xsfg"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="16sp"
+                        android:layout_margin="10dp"
+                        android:textColor="@android:color/black"/>
 
-            <View
-                    android:id="@+id/view_line_7"
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:visibility="gone"
-                    android:background="@android:color/darker_gray"/>
+                <View
+                        android:id="@+id/view_line_7"
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:visibility="gone"
+                        android:background="@android:color/darker_gray"/>
 
-            <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="20sp"
-                    android:text="总体评价"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginLeft="10dp"
-                    android:textColor="@android:color/darker_gray"/>
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="20sp"
+                        android:text="总体评价"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginLeft="10dp"
+                        android:textColor="@android:color/darker_gray"/>
 
-            <TextView
-                    android:id="@+id/tv_ztpj"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textSize="16sp"
-                    android:layout_margin="10dp"
-                    android:textColor="@android:color/black"/>
+                <TextView
+                        android:id="@+id/tv_ztpj"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="16sp"
+                        android:layout_margin="10dp"
+                        android:textColor="@android:color/black"/>
+            </LinearLayout>
         </LinearLayout>
     </ScrollView>
 

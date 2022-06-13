@@ -16,6 +16,10 @@ object AggregateDataNetwork {
 
     private val constellationService = ServiceCreator.create<ConstellationService>()
 
+    private val weatherService = ServiceCreator.create<WeatherService>()
+
+    suspend fun getWeatherInfo(city: String) = weatherService.getWeatherInfo(city).await()
+
     suspend fun getConstellationInfo(keyword: String) = constellationService.getConstellationInfo(keyword).await()
 
     suspend fun getConstellationList() = constellationService.getConstellationList().await()

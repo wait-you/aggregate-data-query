@@ -55,7 +55,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     //设置点击RadioButton文字和背景颜色并加载FoundFragment
-    private fun springTravelFragmentLoad() {
+    private fun weatherFragmentLoad() {
         binding.rbFound.setCompoundDrawablesWithIntrinsicBounds(0, R.mipmap.guide_found_on, 0, 0)
         binding.rbFound.setTextColor(getColor(R.color.lightblue))
         if (springTravelFragment == null){
@@ -77,7 +77,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     //设置点击RadioButton文字和背景颜色并加载HomePageFragment
-    private fun weatherFragmentLoad() {
+    private fun springTravelFragmentLoad() {
         //变换图标
         binding.rbHomePage.setCompoundDrawablesWithIntrinsicBounds(0, R.mipmap.guide_homepage_on, 0, 0)
         //变换文字颜色
