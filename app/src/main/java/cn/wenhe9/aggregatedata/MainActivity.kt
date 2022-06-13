@@ -58,11 +58,11 @@ class MainActivity : AppCompatActivity() {
     private fun weatherFragmentLoad() {
         binding.rbFound.setCompoundDrawablesWithIntrinsicBounds(0, R.mipmap.guide_found_on, 0, 0)
         binding.rbFound.setTextColor(getColor(R.color.lightblue))
-        if (springTravelFragment == null){
-            springTravelFragment = SpringTravelFragment()
-            fragmentTransaction.add(R.id.fg_content, springTravelFragment!!)
+        if (weatherFragment == null){
+            weatherFragment = WeatherFragment()
+            fragmentTransaction.add(R.id.fg_content, weatherFragment!!)
         }
-        fragmentTransaction.show(springTravelFragment!!)
+        fragmentTransaction.show(weatherFragment!!)
     }
 
     //设置点击RadioButton文字和背景颜色并加载MusicFragment
@@ -82,11 +82,11 @@ class MainActivity : AppCompatActivity() {
         binding.rbHomePage.setCompoundDrawablesWithIntrinsicBounds(0, R.mipmap.guide_homepage_on, 0, 0)
         //变换文字颜色
         binding.rbHomePage.setTextColor(getColor(R.color.lightblue))
-        if (weatherFragment == null){
-            weatherFragment = WeatherFragment()
-            fragmentTransaction.add(R.id.fg_content, weatherFragment!!)
+        if (springTravelFragment == null){
+            springTravelFragment = SpringTravelFragment()
+            fragmentTransaction.add(R.id.fg_content, springTravelFragment!!)
         }
-        fragmentTransaction.show(weatherFragment!!)
+        fragmentTransaction.show(springTravelFragment!!)
     }
 
     /**
@@ -113,6 +113,8 @@ class MainActivity : AppCompatActivity() {
         binding.rbHomePage.setTextColor(getColor(R.color.tab_text_bg))
         binding.rbFound.setCompoundDrawablesWithIntrinsicBounds(0, R.mipmap.guide_found, 0, 0)
         binding.rbFound.setTextColor(getColor(R.color.tab_text_bg))
+        binding.checkwork.setCompoundDrawablesWithIntrinsicBounds(0, R.mipmap.guide_music, 0, 0)
+        binding.checkwork.setTextColor(getColor(R.color.tab_text_bg))
     }
 
 
